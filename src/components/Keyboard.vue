@@ -31,12 +31,24 @@
             button m
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
+import Vue from "vue";
 
 export default Vue.extend({
-    name: 'Keyboard'
-})
+  name: "Keyboard",
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .keyrow {
+    display: flex;
+    justify-content: center;
+  }
+
+  .chosen {
+    background: var(--color-neutral);
+    border-radius: 5px;
+    font-size: var(--font-size-medium);
+    color: #ffffff;
+  }
+</style>

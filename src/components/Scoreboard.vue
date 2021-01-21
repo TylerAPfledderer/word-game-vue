@@ -1,20 +1,18 @@
 <template lang="pug">
     #scoreboard.section
         ol
-            li.tries
+            li.tries(v-for="heart in totalHearts" :key="heart")
                 img(src="../assets/liveHeart.png", alt="", height="35px", width="30px")
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
-    name: 'Scoreboard'
+    name: 'Scoreboard',
+    props: ['totalHearts']
 })
 </script>
 
 <style lang="scss" scoped>
-    ol {
-        list-style: none;
-    }
 </style>

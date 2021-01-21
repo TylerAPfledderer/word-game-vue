@@ -1,9 +1,9 @@
 <template lang="pug">
     #banner.section
-        h2 Guess this Phrase!
+        h2.header Guess this Phrase!
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -11,4 +11,10 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+  .header {
+    color: var(--color-start);
+  }
+
+</style>

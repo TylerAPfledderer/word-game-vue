@@ -17,18 +17,14 @@
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-typescript": "^5.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "ts-loader": "^8.0.14",
-    "typescript": "~3.9.3",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -38,8 +34,7 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended",
-      "@vue/typescript/recommended"
+      "eslint:recommended"
     ],
     "parserOptions": {
       "ecmaVersion": 2020
