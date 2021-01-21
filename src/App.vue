@@ -1,29 +1,36 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+<template lang="pug">
+  #app
+    Overlay
+    Banner
+    Phrase
+    Keyboard
+    Scoreboard
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import Overlay from './components/Overlay.vue';
+import Banner from './components/Banner.vue';
+import Phrase from './components/Phrase.vue';
+import Keyboard from './components/Keyboard.vue';
+import Scoreboard from './components/Scoreboard.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
-    HelloWorld
+    Overlay,
+    Banner,
+    Phrase,
+    Keyboard,
+    Scoreboard
   }
 });
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+  }
 </style>
