@@ -14,6 +14,7 @@ import Banner from "./components/Banner.vue";
 import Phrase from "./components/Phrase.vue";
 import Keyboard from "./components/Keyboard.vue";
 import Scoreboard from "./components/Scoreboard.vue";
+import { mapMutations } from 'vuex';
 
 export default Vue.extend({
   name: "App",
@@ -24,10 +25,26 @@ export default Vue.extend({
     Keyboard,
     Scoreboard,
   },
+  methods: {
+    ...mapMutations(['setActivePhrase'])
+  },  
   data() {
     return {
-      totalHearts: 5
+      totalHearts: 5,
+      phrases: [
+        "Happy Coding",
+        "Never Give Up",
+        "Let it Go",
+        "Piece of Cake",
+        "Back to Square One"
+      ]
     }
+  },
+  created() {
+    // Replace with a mutation to set active phrase
+    // "setActivePhrase(this.phrases)"
+    this.setActivePhrase(this.phrases);
+
   }
 });
 </script>

@@ -6,12 +6,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     misses: 5,
-    activePhrase: "Test"
+    activePhrase: null
   },
   mutations: {
-  },
-  actions: {
-  },
-  modules: {
+    setActivePhrase (state, phraseList) {
+      const randomPhrase = phraseList[Math.floor(Math.random() * phraseList.length)]
+      state.activePhrase = randomPhrase;
+    }
   }
 })
