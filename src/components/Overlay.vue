@@ -1,15 +1,43 @@
 <template lang="pug">
-    #overlay.start(style="display: none;")
+    #overlay.start(ref="overlay", :class="gameOver")
         h2.title Wheel of Success
         h3#js-end-statement &nbsp
-        button#js-btn-reset Start Game
+        button#overlay-btn(@click="this.startGame") {{ newGameBtn }}
 </template>
 
 <script>
 import Vue from "vue";
+import { mapActions } from 'vuex';
 
 export default Vue.extend({
   name: "Overlay",
+  props: {
+    phraseList: {
+      type: Array,
+      required: true
+    }
+  },
+  data() {
+    return {
+      gameOver: {
+        "win": false,
+        "lose": false
+      },
+      newGame: false
+    }
+  },
+  computed: {
+    newGameBtn: function() { 
+      return this.newGame ? "New Game" : "Start Game";
+    }
+  },
+  methods: {
+    ...mapActions(['storeActivePhrase']),
+    startGame() {
+      this.storeActivePhrase(this.phraseList);
+      this.$refs.overlay.style.display = "none";
+    }
+  }
 });
 </script>
 
@@ -29,7 +57,7 @@ export default Vue.extend({
     z-index: 10000;
   }
 
-  #js-btn-reset {
+  #overlay-btn {
     cursor: pointer;
     padding: 8px;
     margin: 50px auto;

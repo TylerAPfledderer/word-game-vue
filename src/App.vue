@@ -1,6 +1,6 @@
 <template lang="pug">
   #app
-    Overlay
+    Overlay(:phraseList="this.phrases")
     Banner
     Phrase
     Keyboard
@@ -39,12 +39,6 @@ export default Vue.extend({
         "Back to Square One"
       ]
     }
-  },
-  created() {
-    // Replace with a mutation to set active phrase
-    // "setActivePhrase(this.phrases)"
-    this.setActivePhrase(this.phrases);
-
   }
 });
 </script>

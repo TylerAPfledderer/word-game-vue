@@ -6,23 +6,14 @@
 
 <script>
 import Vue from "vue";
-import { mapState } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: "Phrase",
   computed: {
-    ...mapState(["activePhrase"]),
-    phrase() {
-      const phraseArr = this.activePhrase.split("");
-      let letterList = [];
-      phraseArr.forEach((letter) => {
-        if (letter === " ") {
-          return letterList.push({className: "space", text: ""});
-        }
-        letterList.push({className: "letter", text: letter});
-      });
-      return letterList;
-    },
+    ...mapGetters({
+      phrase: 'getPhraseArray'
+    }),
   }
 });
 </script>
