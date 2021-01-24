@@ -1,41 +1,25 @@
 <template lang="pug">
     #keyboard.section
-        .keyrow
-            button q
-            button w
-            button e
-            button r
-            button t
-            button y
-            button u
-            button i
-            button o
-            button p
-        .keyrow
-            button a
-            button s
-            button d
-            button f
-            button g
-            button h
-            button j
-            button k
-            button l
-        .keyrow
-            button z
-            button x
-            button c
-            button v
-            button b
-            button n
-            button m
+        .keyboard(v-for="(row, index) in keyboardRows" :key="index")
+          <KeyboardButton v-for="(key, id) in row" :key="id" :letter="key"/>
 </template>
 
 <script>
 import Vue from "vue";
+import KeyboardButton from "./KeyboardButton";
 
 export default Vue.extend({
-  name: "Keyboard"
+  name: "Keyboard",
+  components: {KeyboardButton},
+  data() {
+    return {
+      keyboardRows: [
+        ["q","w","e","r","t","y","u","i","o","p"],
+        ["a","s","d","f","g","h","j","k","l"],
+        ["z","x","c","v","b","n","m"]
+      ]
+    }
+  }
 });
 </script>
 
@@ -43,12 +27,5 @@ export default Vue.extend({
   .keyrow {
     display: flex;
     justify-content: center;
-  }
-
-  .chosen {
-    background: var(--color-neutral);
-    border-radius: 5px;
-    font-size: var(--font-size-medium);
-    color: #ffffff;
   }
 </style>
