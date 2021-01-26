@@ -1,6 +1,6 @@
 <template lang="pug">
     #keyboard.section
-        .keyboard(v-for="(row, index) in keyboardRows" :key="index")
+        .keyboard(v-for="row in keyboardRows")
           <KeyboardButton v-for="(key, id) in row" :key="id" :letter="key"/>
 </template>
 

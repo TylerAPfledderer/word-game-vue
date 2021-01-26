@@ -1,20 +1,22 @@
 <template lang="pug">
     #phrase.section
         ul
-          li(v-for="(item, index) in phrase", :class="item.className") {{item.text}}
+          PhraseLetter(v-for="(item, index) in phrase" :key="index" :className="item.className" :letter="item.text")
 </template>
 
 <script>
 import Vue from "vue";
-import { mapGetters } from 'vuex';
+import PhraseLetter from "./PhraseLetter";
+import { mapGetters } from "vuex";
 
 export default Vue.extend({
   name: "Phrase",
+  components: {PhraseLetter},
   computed: {
     ...mapGetters({
-      phrase: 'getPhraseArray'
+      phrase: "getPhraseArray",
     }),
-  }
+  },
 });
 </script>
 
@@ -37,6 +39,7 @@ export default Vue.extend({
   width: 15px;
 }
 
+/* This selector is place here instead of the PhraseLetter component to follow CSS cascade */
 .show {
   color: #000;
   background-color: #76ce82;

@@ -9,7 +9,8 @@ export default new Vuex.Store({
     activePhrase: null
   },
   mutations: {
-    storeActivePhrase: (state, phrase) => state.activePhrase = phrase
+    storeActivePhrase: (state, phrase) => state.activePhrase = phrase.toLowerCase(),
+    addMiss: state => state.misses++
   },
   actions: {
     storeActivePhrase({ commit }, phraseList) {
