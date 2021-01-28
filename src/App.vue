@@ -14,7 +14,7 @@ import Banner from "./components/Banner.vue";
 import Phrase from "./components/Phrase.vue";
 import Keyboard from "./components/Keyboard.vue";
 import Scoreboard from "./components/Scoreboard.vue";
-import { mapMutations } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default Vue.extend({
   name: "App",
@@ -26,8 +26,12 @@ export default Vue.extend({
     Scoreboard,
   },
   methods: {
-    ...mapMutations(['setActivePhrase'])
+    ...mapMutations(['setActivePhrase', 'updateGameResult']),
+    ...mapActions(['resetStates'])
   },  
+  computed: {
+    ...mapState(['misses', 'activePhrase', 'correct', 'gameResult'])
+  },
   data() {
     return {
       totalHearts: 5,
@@ -38,6 +42,31 @@ export default Vue.extend({
         "Piece of Cake",
         "Back to Square One"
       ]
+    }
+  },
+  watch: {
+    misses(value) {
+      if (value === this.totalHearts) {
+        this.updateGameResult('lose');
+      }
+    },
+    correct(value) {
+      // Immediately return if state holds null
+      if (!this.activePhrase) {
+        return;
+      }
+      const phraseNoSpace = this.activePhrase.split(' ').join('');
+      const phraseNoDuplicates = phraseNoSpace.split('').filter((c, index) => phraseNoSpace.indexOf(c) === index).join('');
+      const phraseLength = phraseNoDuplicates.length;
+      console.log('🚀 ~ file: App.vue ~ line 54 ~ phraseLength, value: ', phraseLength, value); 
+      if (value === phraseLength) {
+        this.updateGameResult('win');
+      }
+    },
+    gameResult(result) {
+      if (result) {
+        this.resetStates();
+      }
     }
   }
 });

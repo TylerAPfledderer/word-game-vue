@@ -11,24 +11,35 @@ export default Vue.extend({
   name: "KeybordButton",
   props: ["letter"],
   computed: {
-    ...mapState(["activePhrase", "misses"]),
+    ...mapState(["activePhrase", "misses", "gameResult"]),
   },
   methods: {
-    ...mapMutations(["addMiss"]),
+    ...mapMutations(["addMiss", "addCorrect"]),
     checkLetter() {
-      let { textContent, classList } = this.$refs.button;
+      const { textContent, classList } = this.$refs.button;
       const regex = new RegExp(`.*[${textContent}.*]`, "i");
       this.$refs.button.disabled = true;
 
       if (!regex.test(this.activePhrase)) {
         this.addMiss();
-        return classList.add("wrong");
+        classList.add("wrong");
+        return;
       }
 
       EventBus.$emit("matched-letter", textContent);
-      return classList.add("chosen");
+      this.addCorrect();
+      classList.add("chosen");
     },
   },
+  watch: {
+    gameResult(result) {
+      if (result) {
+        const button = this.$refs.button;
+        button.disabled = false;
+        button.classList.remove('chosen', 'wrong');
+      }
+    }
+  }
 });
 </script>
 

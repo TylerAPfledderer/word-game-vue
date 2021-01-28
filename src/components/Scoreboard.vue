@@ -1,9 +1,9 @@
 <template lang="pug">
     #scoreboard.section
         ol
-            li.tries(v-for='heart in totalHearts')
-              img(v-if='heart <= misses' src='../assets/lostHeart.png' alt='' height='35px' width='30px')
-              img(v-else src='../assets/liveHeart.png' alt='' height='35px' width='30px')
+          li.tries(v-for='heart in totalHearts')
+            img(v-if='heart <= misses' src='../assets/lostHeart.png' alt='' height='35px' width='30px')
+            img(v-else src='../assets/liveHeart.png' alt='' height='35px' width='30px')
 </template>
 
 <script>

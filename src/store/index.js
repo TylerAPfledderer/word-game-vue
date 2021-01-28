@@ -6,16 +6,28 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     misses: 0,
-    activePhrase: null
+    correct: 0,
+    activePhrase: null,
+    gameResult: null
   },
   mutations: {
     storeActivePhrase: (state, phrase) => state.activePhrase = phrase.toLowerCase(),
-    addMiss: state => state.misses++
+    addCorrect: state => state.correct++,
+    addMiss: state => state.misses++,
+    updateGameResult: (state, result) => state.gameResult = result,
+    resetMisses: state => state.misses = 0,
+    resetCorrect: state => state.correct = 0,
+    clearPhrase: state => state.activePhrase = null
   },
   actions: {
-    storeActivePhrase({ commit }, phraseList) {
+    declareActivePhrase({ commit }, phraseList) {
       const randomPhrase = phraseList[Math.floor(Math.random() * phraseList.length)]
       commit("storeActivePhrase", randomPhrase);
+    },
+    resetStates({ commit }) {
+      commit('resetMisses');
+      commit('resetCorrect');
+      commit('clearPhrase');
     }
   },
   getters: {
