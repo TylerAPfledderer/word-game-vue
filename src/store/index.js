@@ -8,10 +8,12 @@ export default new Vuex.Store({
     misses: 0,
     correct: 0,
     activePhrase: null,
+    currentPhraseIndex: null,
     gameResult: null
   },
   mutations: {
     storeActivePhrase: (state, phrase) => state.activePhrase = phrase.toLowerCase(),
+    storeCurrentPhraseIndex: (state, index) => state.currentPhraseIndex = index,
     addCorrect: state => state.correct++,
     addMiss: state => state.misses++,
     updateGameResult: (state, result) => state.gameResult = result,
@@ -21,8 +23,15 @@ export default new Vuex.Store({
   },
   actions: {
     declareActivePhrase({ commit }, phraseList) {
-      const randomPhrase = phraseList[Math.floor(Math.random() * phraseList.length)]
+      let randomIndex = Math.floor(Math.random() * phraseList.length);
+      
+      // Do not allow a phrase to be repeated twice
+      if (randomIndex === this.state.currentPhraseIndex) {
+        randomIndex++;
+      }
+      const randomPhrase = phraseList[randomIndex];
       commit("storeActivePhrase", randomPhrase);
+      commit("storeCurrentPhraseIndex", randomIndex);
     },
     resetStates({ commit }) {
       commit('resetMisses');

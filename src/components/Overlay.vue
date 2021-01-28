@@ -80,25 +80,25 @@ export default Vue.extend({
 
 .start {
   background-color: var(--color-start);
-}
 
-.start button {
-  color: var(--color-win);
+  & button {
+    color: var(--color-win);
+  }
 }
 
 .win {
   background-color: var(--color-win);
-}
 
-.win a {
-  color: var(--color-win);
+  & a {
+    color: var(--color-win);
+  }
 }
 
 .lose {
   background-color: var(--color-lose);
-}
 
-.lose a {
-  color: var(--color-lose);
+  & a {
+    color: var(--color-lose);
+  }
 }
 </style>

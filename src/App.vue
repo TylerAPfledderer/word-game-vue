@@ -11,10 +11,12 @@
 import Vue from "vue";
 import Overlay from "./components/Overlay.vue";
 import Banner from "./components/Banner.vue";
-import Phrase from "./components/Phrase.vue";
-import Keyboard from "./components/Keyboard.vue";
+import Phrase from "@/components/AppPhrase";
+import Keyboard from "@/components/AppKeyboard";
 import Scoreboard from "./components/Scoreboard.vue";
-import { mapActions, mapMutations, mapState } from 'vuex';
+import { mapActions, mapMutations, mapState } from "vuex";
+import { EventBus } from "./main";
+const phraseList = require("../data/phraseList");
 
 export default Vue.extend({
   name: "App",
@@ -26,28 +28,22 @@ export default Vue.extend({
     Scoreboard,
   },
   methods: {
-    ...mapMutations(['setActivePhrase', 'updateGameResult']),
-    ...mapActions(['resetStates'])
-  },  
+    ...mapMutations(["setActivePhrase", "updateGameResult"]),
+    ...mapActions(["resetStates"]),
+  },
   computed: {
-    ...mapState(['misses', 'activePhrase', 'correct', 'gameResult'])
+    ...mapState(["misses", "activePhrase", "correct", "gameResult"]),
   },
   data() {
     return {
       totalHearts: 5,
-      phrases: [
-        "Happy Coding",
-        "Never Give Up",
-        "Let it Go",
-        "Piece of Cake",
-        "Back to Square One"
-      ]
-    }
+      phrases: phraseList,
+    };
   },
   watch: {
     misses(value) {
       if (value === this.totalHearts) {
-        this.updateGameResult('lose');
+        this.updateGameResult("lose");
       }
     },
     correct(value) {
@@ -55,20 +51,23 @@ export default Vue.extend({
       if (!this.activePhrase) {
         return;
       }
-      const phraseNoSpace = this.activePhrase.split(' ').join('');
-      const phraseNoDuplicates = phraseNoSpace.split('').filter((c, index) => phraseNoSpace.indexOf(c) === index).join('');
+      const phraseNoSpace = this.activePhrase.split(" ").join("");
+      const phraseNoDuplicates = phraseNoSpace
+        .split("")
+        .filter((c, index) => phraseNoSpace.indexOf(c) === index)
+        .join("");
       const phraseLength = phraseNoDuplicates.length;
-      console.log('🚀 ~ file: App.vue ~ line 54 ~ phraseLength, value: ', phraseLength, value); 
       if (value === phraseLength) {
-        this.updateGameResult('win');
+        this.updateGameResult("win");
       }
     },
     gameResult(result) {
       if (result) {
         this.resetStates();
+        EventBus.$off(); // This is required to prevent undefined warnings when reseting the game with new values.
       }
-    }
-  }
+    },
+  },
 });
 </script>
 
