@@ -1,24 +1,9 @@
-# word-game-vue
+# Treehouse Word Guessing Game in VueJS
 
-## Project setup
-```
-npm install
-```
+This is a project from the Treehouse Front-End and FullStackJS Techdegrees, converted to a VueJS App.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Features
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- Use of the Vuex store to handle state
+- Creation of Event Bus to emit events globally
+- Use of a Watch option to react to state changes
